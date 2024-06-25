@@ -39,6 +39,10 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """
+        return content of desired page and page size as a list
+        empty list if page is out of range
+        """
         assert isinstance(page, int) and isinstance(page_size, int)
         assert page > 0 and page_size > 0
 
@@ -47,3 +51,23 @@ class Server:
             return self.dataset()[start: end]
         except IndexError:
             return []
+
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """returns an object with certain values"""
+        dataset = self.dataset()
+        len_dataset = len(dataset)
+        data = self.get_page(page, page_size)
+        page_s = len(data)
+        total_pages = math.ceil(len_dataset / page_size)
+        next_page = page + 1 if page < total_pages else None
+        prev_page = page - 1 if page > 1 else None
+
+        hyper_data = {
+            "page_size": page_s,
+            "page": page,
+            "data": data,
+            "next_page": next_page,
+            "prev_page": prev_page,
+            "total_pages": total_pages
+        }
+        return hyper_data
