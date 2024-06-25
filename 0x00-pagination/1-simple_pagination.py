@@ -52,5 +52,5 @@ class Server:
             try:
                 page.append(dataset[i])
             except IndexError:
-                return page
+                return []
         return page
