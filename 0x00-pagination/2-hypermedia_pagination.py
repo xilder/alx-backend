@@ -56,18 +56,13 @@ class Server:
         """returns an object with certain values"""
         dataset = self.dataset()
         len_dataset = len(dataset)
-        data = self.get_page(page, page_size)
-        page_s = len(data)
-        total_pages = math.ceil(len_dataset / page_size)
-        next_page = page + 1 if page < total_pages else None
-        prev_page = page - 1 if page > 1 else None
+        hyper_data = {}
+        hyper_data['page'] = page
+        hyper_data['data'] = self.get_page(page, page_size)
+        hyper_data['page_size'] = page_size
+        hyper_data['total_pages'] = math.ceil(len_dataset / page_size)
+        hyper_data['next_page'] = page + 1 if page < hyper_data['total_pages']\
+            else None
+        hyper_data['prev_page'] = page - 1 if page > 1 else None
 
-        hyper_data = {
-            "page_size": page_s,
-            "page": page,
-            "data": data,
-            "next_page": next_page,
-            "prev_page": prev_page,
-            "total_pages": total_pages
-        }
         return hyper_data
