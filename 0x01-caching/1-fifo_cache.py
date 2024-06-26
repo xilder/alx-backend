@@ -27,6 +27,7 @@ class FIFOCache(BaseCaching):
         if len(self.cache_data.keys()) > self.MAX_ITEMS:
             k = self.queue.popleft()
             del self.cache_data[k]
+            print(f"DISCARD: {k}")
 
 
     def get(self, key):
