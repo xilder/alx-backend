@@ -17,7 +17,6 @@ class FIFOCache(BaseCaching):
         super().__init__()
         self.queue = deque()
 
-
     def put(self, key, item):
         """put method"""
         if key and item:
@@ -28,7 +27,6 @@ class FIFOCache(BaseCaching):
             k = self.queue.popleft()
             del self.cache_data[k]
             print(f"DISCARD: {k}")
-
 
     def get(self, key):
         """get method"""
