@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""babel configuration and integration"""
 from flask import Flask, render_template
 from flask_babel import Babel
 
