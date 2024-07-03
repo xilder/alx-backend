@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""task 3: basic flask app"""
 from flask import Flask, request, render_template
 from flask_babel import Babel
 
@@ -24,9 +25,9 @@ def get_locale():
 
 @app.route("/")
 def welcome():
-    """prints 'Welcome to Holberton"""
-    return render_template("2-index.html")
+    """prints 'Welcome to Holberton'"""
+    return render_template("3-index.html")
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port=5000)
