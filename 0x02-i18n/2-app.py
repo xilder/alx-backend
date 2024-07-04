@@ -4,7 +4,7 @@ from flask import Flask, request, render_template
 from flask_babel import Babel
 
 
-class Config:
+class Config(object):
     """Babel configuration for babel"""
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
