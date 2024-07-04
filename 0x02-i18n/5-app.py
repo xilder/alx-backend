@@ -34,27 +34,28 @@ def get_locale():
         return locale
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
+
 @app.route("/")
 def welcome():
     """prints 'Welcome to Holberton'"""
-    user = g.get("user", None).get("name")
-    return render_template("5-index.html", user=user)
+    return render_template("5-index.html")
+
 
 def get_user():
     """get user"""
-    user_id = request.args.get("login_as", None)
-    if user_id and type(user_id) == int:
-        user = users[user_id]
+    user_id = request.args.get("login_as")
+    if user_id:
+        user = users[int(user_id)]
         return user
     return None
-ProcessLookupError
+
 
 @app.before_request
 def before_request():
     """gets the user and stores it globally"""
     user = get_user()
     if user:
-        g["user"] = user
+        g.user = user
 
 
 if __name__ == "__main__":
