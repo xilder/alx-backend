@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""task 3: basic flask app"""
-from flask import Flask, request, render_template
+"""task 4: basic flask app"""
+from flask import Flask, request, render_template, g
 from flask_babel import Babel
 
 
-class Config:
+class Config(object):
     """Babel configuration for babel"""
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
@@ -18,16 +18,20 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale():
-    """sets default locale"""
+def get_locale() -> str:
+    """Gets the best matching locale for a web page"""
+    locale = request.args.get("locale", "")
+
+    if locale in app.config["LANGUAGES"]:
+        return locale
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
 @app.route("/")
 def welcome():
     """prints 'Welcome to Holberton'"""
-    return render_template("3-index.html")
+    return render_template("4-index.html")
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="localhost", port=5000)
