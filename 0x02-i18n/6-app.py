@@ -29,7 +29,6 @@ users = {
 def get_locale():
     """sets default locale"""
     locale = request.args.get("locale", "")
-
     if locale in app.config["LANGUAGES"]:
         return locale
     if g.user and g.user["locale"] in app.config["LANGUAGES"]:
@@ -44,6 +43,7 @@ def get_locale():
 def welcome():
     """prints 'Welcome to Holberton'"""
     return render_template("6-index.html")
+    # return g.user/
 
 
 def get_user():
