@@ -7,7 +7,7 @@ app.url_map.strict_slashes = False
 
 
 @app.route("/")
-def welcome():
+def welcome() -> str:
     """prints 'Welcome to Holberton"""
     return render_template("0-index.html")
 

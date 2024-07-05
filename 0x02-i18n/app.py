@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """task 3: basic flask app"""
+from typing import Dict, Union
 from flask import Flask, request, render_template, g
 from flask_babel import Babel, format_datetime
 from pytz import timezone
@@ -28,7 +29,7 @@ users = {
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """sets default locale"""
     locale = request.args.get("locale", "")
     if locale in app.config["LANGUAGES"]:
@@ -43,7 +44,7 @@ def get_locale():
 
 
 @babel.timezoneselector
-def get_timezone():
+def get_timezone() -> str:
     """gets the timezone"""
     tz = request.args.get("timezone", None)
     if not tz and g.user["timezone"]:
@@ -55,14 +56,14 @@ def get_timezone():
 
 
 @app.route("/")
-def welcome():
+def welcome() -> str:
     """prints 'Welcome to Holberton'"""
     g.time = format_datetime()
     return render_template("index.html")
     # return g.user/
 
 
-def get_user():
+def get_user() -> Union[Dict, None]:
     """get user"""
     user_id = request.args.get("login_as")
     if user_id:
@@ -72,7 +73,7 @@ def get_user():
 
 
 @app.before_request
-def before_request():
+def before_request() -> None:
     """gets the user and stores it globally"""
     user = get_user()
     if user:

@@ -18,13 +18,13 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """sets default locale"""
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
 @app.route("/")
-def welcome():
+def welcome() -> str:
     """prints 'Welcome to Holberton"""
     return render_template("2-index.html")
 

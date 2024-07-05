@@ -28,7 +28,7 @@ def get_locale() -> str:
 
 
 @app.route("/")
-def welcome():
+def welcome() -> str:
     """prints 'Welcome to Holberton'"""
     return render_template("4-index.html")
 
